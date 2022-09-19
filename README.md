@@ -1,12 +1,11 @@
 # Interpretable model for forecasting football match results
-Data scource for this Project: European Soccer Database (https://www.kaggle.com/datasets/hugomathien/soccer) and European Soccer Database Supplementary (https://www.kaggle.com/datasets/jiezi2004/soccer)
+Data scource for this Project: European Soccer Database (https://www.kaggle.com/datasets/hugomathien/soccer) and European Soccer Database Supplementary (https://www.kaggle.com/datasets/jiezi2004/soccer).
 
-The following documents are the code and dataset for the proposed model in (Yeung et al., 2022)
+The following documents are the code and dataset for the proposed model (Yeung et al., 2022).
 
-datav7.xlsx and data_tree.xlsx are the dataset for predicting match statistics and xGboosting Tree respectivly
+1. datav7.xlsx and data_tree.xlsx are the datasets for predicting match statistics (LR) and match result forecast (XGBoost) respectively.
 
-LR.py and Tree.py are the code for predicting match statistics and xGboosting Tree respectivly
-
+2. LR.py and Tree.py are the code for predicting match statistics (LR) and match result forecast (XGBoost) respectively.
 
 # References
 Yeung, C. (2022). "Forecasting football match result with gap rating and player rating”. IX Mathsport International 2022 Proceedings, 112–118.
