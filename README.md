@@ -8,7 +8,7 @@ The following documents are the code and dataset for the proposed model (Yeung e
 2. LR.py and Tree.py are the code for predicting match statistics (LR) and match result forecast (XGBoost) respectively.
 
 # References
-Yeung, C. (2022). "Forecasting football match result with gap rating and player rating”. IX Mathsport International 2022 Proceedings, 112–118.
+Yeung, C. (2022). "Forecasting football match result with GAP rating and player rating”. IX Mathsport International 2022 Proceedings, 112–118.
 2022
 
 Yeung, C., Bunker, R., & Fujii, K. (2022). "Building an interpretable football match result forecast model with predicted match statistics and player rating". Working Paper
