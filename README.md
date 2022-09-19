@@ -11,5 +11,6 @@ LR.py and Tree.py are the code for predicting match statistics and xGboosting Tr
 # References
 Yeung, C. (2022). "Forecasting football match result with gap rating and player rating”. IX Mathsport International 2022 Proceedings, 112–118.
 2022
+
 Yeung, C., Bunker, R., & Fujii, K. (2022). "Building an interpretable football match result forecast model with predicted match statistics and player rating". Working Paper
-Bunker, R., Yeung, C.K., Susnjak, T., Espie, C., & Fujii, K. (2022). Comparing Elo Ratings- with Machine Learning-based Methods for Tennis Match Result Prediction. Working Paper.
+
