@@ -23,7 +23,7 @@ import numpy as np
 import statsmodels.formula.api as smf
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 #%%
-data=pd.read_excel("datav7.xlsx") #please add your own document path
+data=pd.read_excel("data_LR.xlsx") #please add your own document path
 data=data.drop('Unnamed: 0', axis=1) #drop repeated index
 data=data.drop(['GK_SKI_H','GK_ATT_H','GK_DEF_H','GK_SKI_A','GK_ATT_A', 'GK_DEF_A'], axis=1) #drop unwanted FIFA rating
 data=data.drop(['home_team_goal', 'away_team_goal'], axis=1) #drop unwanted Match Statistics
