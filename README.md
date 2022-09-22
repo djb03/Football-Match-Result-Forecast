@@ -1,4 +1,4 @@
-# Interpretable model for forecasting football match results
+# Generalizecd interpretable model for forecasting football match results
 Data sources for this Project: European Soccer Database (https://www.kaggle.com/datasets/hugomathien/soccer) and European Soccer Database Supplementary (https://www.kaggle.com/datasets/jiezi2004/soccer).
 
 The code and dataset for the proposed model (Yeung et al., 2022) are contained in the following files.
