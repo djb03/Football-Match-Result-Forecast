@@ -1,4 +1,4 @@
-# Generalizecd interpretable model for forecasting football match results
+# Generalized interpretable model for forecasting football match results
 Data sources for this Project: European Soccer Database (https://www.kaggle.com/datasets/hugomathien/soccer) and European Soccer Database Supplementary (https://www.kaggle.com/datasets/jiezi2004/soccer).
 
 The code and dataset for the proposed model (Yeung et al., 2022) are contained in the following files.
@@ -11,5 +11,5 @@ The code and dataset for the proposed model (Yeung et al., 2022) are contained i
 Yeung, C. (2022). "Forecasting football match result with GAP rating and player rating”. IX Mathsport International 2022 Proceedings, 112–118.
 2022
 
-Yeung, C., Bunker, R., & Fujii, K. (2022). "Building an interpretable football match result forecast model with predicted match statistics and player ratings". Working Paper
+Yeung, C., Bunker, R., & Fujii, K. (2022). "Generalized interpretable football match result forecast model with predicted match statistics and player ratings". Working Paper
 
