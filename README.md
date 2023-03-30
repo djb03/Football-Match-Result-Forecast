@@ -11,5 +11,5 @@ The code and dataset for the proposed model (Yeung et al., 2022) are contained i
 Yeung, C. (2022). "Forecasting football match result with GAP rating and player rating”. IX Mathsport International 2022 Proceedings, 112–118.
 2022
 
-Yeung, C., Bunker, R., & Fujii, K. (2022). "Generalized and interpretable machine learning model with coach’s decision and players’ quality features for football match result forecast". Working Paper
+Yeung, C., Bunker, R., & Fujii, K. (2023). "A framework of interpretable match results prediction in football with FIFA ratings and team formation". Plos One, Accepted
 
