@@ -79,7 +79,7 @@ odds=data_v[odds]
 #%%
 odd_home_win=np.where(odds >= 0.5, 1, 0)
 #%%
-xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='gpu_hist', gpu_id=0)
+xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='hist')
 
 params = {    
     "gamma": arange(0,0.5,0.1),
@@ -97,7 +97,7 @@ print("Best: %f using %s" % (m3.best_score_, m3.best_params_))
 
 p3 = m3.predict_proba(t3)
 #%%
-xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='gpu_hist', gpu_id=0)
+xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='hist')
 
 params = {    
     "gamma": arange(0,0.5,0.1),
@@ -116,7 +116,7 @@ print("Best: %f using %s" % (m11.best_score_, m11.best_params_))
 p11 = m11.predict_proba(t11)
 
 
-xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='gpu_hist', gpu_id=0)
+xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='hist')
 
 params = {    
     "gamma": arange(0,0.5,0.1),
@@ -134,7 +134,7 @@ print("Best: %f using %s" % (m12.best_score_, m12.best_params_))
 
 p12 = m12.predict_proba(t12)
 
-xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='gpu_hist', gpu_id=0)
+xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='hist')
 
 params = {    
     "gamma": arange(0,0.5,0.1),
@@ -153,7 +153,7 @@ print("Best: %f using %s" % (m21.best_score_, m21.best_params_))
 p21 = m21.predict_proba(t21)
 
 
-xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='gpu_hist', gpu_id=0)
+xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42,tree_method='hist')
 
 params = {    
     "gamma": arange(0,0.5,0.1),

@@ -310,99 +310,99 @@ data2014 = pd.DataFrame(zip(p_t2_h_shoton, p_t2_h_shotoff, p_t2_h_shot,p_t2_h_cr
                             p_t2_a_shoton, p_t2_a_shotoff, p_t2_a_shot,p_t2_a_cross), columns=[
                                 'h_shoton','h_shotoff','h_shot','h_cross',
                                 'a_shoton','a_shotoff','a_shot','a_cross'])
-data2015 = pd.DataFrame(zip(p_t3_h_shoton, p_t3_h_shotoff, p_t3_h_shot,p_t3_h_cross,
-                            p_t3_a_shoton, p_t3_a_shotoff, p_t3_a_shot,p_t3_a_cross), columns=[
-                                'h_shoton','h_shotoff','h_shot','h_cross',
-                                'a_shoton','a_shotoff','a_shot','a_cross'])                               
+# data2015 = pd.DataFrame(zip(p_t3_h_shoton, p_t3_h_shotoff, p_t3_h_shot,p_t3_h_cross,
+#                             p_t3_a_shoton, p_t3_a_shotoff, p_t3_a_shot,p_t3_a_cross), columns=[
+#                                 'h_shoton','h_shotoff','h_shot','h_cross',
+#                                 'a_shoton','a_shotoff','a_shot','a_cross'])                               
 #%% Create a Pandas Excel writer using XlsxWriter as the engine.
 writer = pd.ExcelWriter('LR_Prediction.xlsx', engine='xlsxwriter')
 
 # Write each dataframe to a different worksheet.
 data2013.to_excel(writer, sheet_name='Sheet1')
 data2014.to_excel(writer, sheet_name='Sheet2')
-data2015.to_excel(writer, sheet_name='Sheet3')
+# data2015.to_excel(writer, sheet_name='Sheet3')
 
 # Close the Pandas Excel writer and output the Excel file.
-writer.save()                          
+writer.close()                          
 #%%
 
-mse_t1_h_shoton=mean_squared_error(p_t1_h_shoton,v1_y_h_shoton)
-mse_t2_h_shoton=mean_squared_error(p_t2_h_shoton,v2_y_h_shoton)
-mse_t3_h_shoton=mean_squared_error(p_t3_h_shoton,v3_y_h_shoton)
+# mse_t1_h_shoton=mean_squared_error(p_t1_h_shoton,v1_y_h_shoton)
+# mse_t2_h_shoton=mean_squared_error(p_t2_h_shoton,v2_y_h_shoton)
+# # mse_t3_h_shoton=mean_squared_error(p_t3_h_shoton,v3_y_h_shoton)
 
-mse_t1_h_shotoff=mean_squared_error(p_t1_h_shotoff,v1_y_h_shotoff)
-mse_t2_h_shotoff=mean_squared_error(p_t2_h_shotoff,v2_y_h_shotoff)
-mse_t3_h_shotoff=mean_squared_error(p_t3_h_shotoff,v3_y_h_shotoff)
+# mse_t1_h_shotoff=mean_squared_error(p_t1_h_shotoff,v1_y_h_shotoff)
+# mse_t2_h_shotoff=mean_squared_error(p_t2_h_shotoff,v2_y_h_shotoff)
+# # mse_t3_h_shotoff=mean_squared_error(p_t3_h_shotoff,v3_y_h_shotoff)
 
-mse_t1_h_shot=mean_squared_error(p_t1_h_shot,v1_y_h_shot)
-mse_t2_h_shot=mean_squared_error(p_t2_h_shot,v2_y_h_shot)
-mse_t3_h_shot=mean_squared_error(p_t3_h_shot,v3_y_h_shot)
+# mse_t1_h_shot=mean_squared_error(p_t1_h_shot,v1_y_h_shot)
+# mse_t2_h_shot=mean_squared_error(p_t2_h_shot,v2_y_h_shot)
+# # mse_t3_h_shot=mean_squared_error(p_t3_h_shot,v3_y_h_shot)
 
-mse_t1_h_cross=mean_squared_error(p_t1_h_cross,v1_y_h_cross)
-mse_t2_h_cross=mean_squared_error(p_t2_h_cross,v2_y_h_cross)
-mse_t3_h_cross=mean_squared_error(p_t3_h_cross,v3_y_h_cross)
+# mse_t1_h_cross=mean_squared_error(p_t1_h_cross,v1_y_h_cross)
+# mse_t2_h_cross=mean_squared_error(p_t2_h_cross,v2_y_h_cross)
+# # mse_t3_h_cross=mean_squared_error(p_t3_h_cross,v3_y_h_cross)
 
-mse_t1_a_shoton=mean_squared_error(p_t1_a_shoton,v1_y_a_shoton)
-mse_t2_a_shoton=mean_squared_error(p_t2_a_shoton,v2_y_a_shoton)
-mse_t3_a_shoton=mean_squared_error(p_t3_a_shoton,v3_y_a_shoton)
+# mse_t1_a_shoton=mean_squared_error(p_t1_a_shoton,v1_y_a_shoton)
+# mse_t2_a_shoton=mean_squared_error(p_t2_a_shoton,v2_y_a_shoton)
+# # mse_t3_a_shoton=mean_squared_error(p_t3_a_shoton,v3_y_a_shoton)
 
-mse_t1_a_shotoff=mean_squared_error(p_t1_a_shotoff,v1_y_a_shotoff)
-mse_t2_a_shotoff=mean_squared_error(p_t2_a_shotoff,v2_y_a_shotoff)
-mse_t3_a_shotoff=mean_squared_error(p_t3_a_shotoff,v3_y_a_shotoff)
+# mse_t1_a_shotoff=mean_squared_error(p_t1_a_shotoff,v1_y_a_shotoff)
+# mse_t2_a_shotoff=mean_squared_error(p_t2_a_shotoff,v2_y_a_shotoff)
+# # mse_t3_a_shotoff=mean_squared_error(p_t3_a_shotoff,v3_y_a_shotoff)
 
-mse_t1_a_shot=mean_squared_error(p_t1_a_shot,v1_y_a_shot)
-mse_t2_a_shot=mean_squared_error(p_t2_a_shot,v2_y_a_shot)
-mse_t3_a_shot=mean_squared_error(p_t3_a_shot,v3_y_a_shot)
+# mse_t1_a_shot=mean_squared_error(p_t1_a_shot,v1_y_a_shot)
+# mse_t2_a_shot=mean_squared_error(p_t2_a_shot,v2_y_a_shot)
+# # mse_t3_a_shot=mean_squared_error(p_t3_a_shot,v3_y_a_shot)
 
-mse_t1_a_cross=mean_squared_error(p_t1_a_cross,v1_y_a_cross)
-mse_t2_a_cross=mean_squared_error(p_t2_a_cross,v2_y_a_cross)
-mse_t3_a_cross=mean_squared_error(p_t3_a_cross,v3_y_a_cross)
+# mse_t1_a_cross=mean_squared_error(p_t1_a_cross,v1_y_a_cross)
+# mse_t2_a_cross=mean_squared_error(p_t2_a_cross,v2_y_a_cross)
+# # mse_t3_a_cross=mean_squared_error(p_t3_a_cross,v3_y_a_cross)
 
-mae_t1_h_shoton=mean_absolute_error(p_t1_h_shoton,v1_y_h_shoton)
-mae_t2_h_shoton=mean_absolute_error(p_t2_h_shoton,v2_y_h_shoton)
-mae_t3_h_shoton=mean_absolute_error(p_t3_h_shoton,v3_y_h_shoton)
+# mae_t1_h_shoton=mean_absolute_error(p_t1_h_shoton,v1_y_h_shoton)
+# mae_t2_h_shoton=mean_absolute_error(p_t2_h_shoton,v2_y_h_shoton)
+# # mae_t3_h_shoton=mean_absolute_error(p_t3_h_shoton,v3_y_h_shoton)
 
-mae_t1_h_shotoff=mean_absolute_error(p_t1_h_shotoff,v1_y_h_shotoff)
-mae_t2_h_shotoff=mean_absolute_error(p_t2_h_shotoff,v2_y_h_shotoff)
-mae_t3_h_shotoff=mean_absolute_error(p_t3_h_shotoff,v3_y_h_shotoff)
+# mae_t1_h_shotoff=mean_absolute_error(p_t1_h_shotoff,v1_y_h_shotoff)
+# mae_t2_h_shotoff=mean_absolute_error(p_t2_h_shotoff,v2_y_h_shotoff)
+# # mae_t3_h_shotoff=mean_absolute_error(p_t3_h_shotoff,v3_y_h_shotoff)
 
-mae_t1_h_shot=mean_absolute_error(p_t1_h_shot,v1_y_h_shot)
-mae_t2_h_shot=mean_absolute_error(p_t2_h_shot,v2_y_h_shot)
-mae_t3_h_shot=mean_absolute_error(p_t3_h_shot,v3_y_h_shot)
+# mae_t1_h_shot=mean_absolute_error(p_t1_h_shot,v1_y_h_shot)
+# mae_t2_h_shot=mean_absolute_error(p_t2_h_shot,v2_y_h_shot)
+# # mae_t3_h_shot=mean_absolute_error(p_t3_h_shot,v3_y_h_shot)
 
-mae_t1_h_cross=mean_absolute_error(p_t1_h_cross,v1_y_h_cross)
-mae_t2_h_cross=mean_absolute_error(p_t2_h_cross,v2_y_h_cross)
-mae_t3_h_cross=mean_absolute_error(p_t3_h_cross,v3_y_h_cross)
+# mae_t1_h_cross=mean_absolute_error(p_t1_h_cross,v1_y_h_cross)
+# mae_t2_h_cross=mean_absolute_error(p_t2_h_cross,v2_y_h_cross)
+# # mae_t3_h_cross=mean_absolute_error(p_t3_h_cross,v3_y_h_cross)
 
-mae_t1_a_shoton=mean_absolute_error(p_t1_a_shoton,v1_y_a_shoton)
-mae_t2_a_shoton=mean_absolute_error(p_t2_a_shoton,v2_y_a_shoton)
-mae_t3_a_shoton=mean_absolute_error(p_t3_a_shoton,v3_y_a_shoton)
+# mae_t1_a_shoton=mean_absolute_error(p_t1_a_shoton,v1_y_a_shoton)
+# mae_t2_a_shoton=mean_absolute_error(p_t2_a_shoton,v2_y_a_shoton)
+# # mae_t3_a_shoton=mean_absolute_error(p_t3_a_shoton,v3_y_a_shoton)
 
-mae_t1_a_shotoff=mean_absolute_error(p_t1_a_shotoff,v1_y_a_shotoff)
-mae_t2_a_shotoff=mean_absolute_error(p_t2_a_shotoff,v2_y_a_shotoff)
-mae_t3_a_shotoff=mean_absolute_error(p_t3_a_shotoff,v3_y_a_shotoff)
+# mae_t1_a_shotoff=mean_absolute_error(p_t1_a_shotoff,v1_y_a_shotoff)
+# mae_t2_a_shotoff=mean_absolute_error(p_t2_a_shotoff,v2_y_a_shotoff)
+# # mae_t3_a_shotoff=mean_absolute_error(p_t3_a_shotoff,v3_y_a_shotoff)
 
-mae_t1_a_shot=mean_absolute_error(p_t1_a_shot,v1_y_a_shot)
-mae_t2_a_shot=mean_absolute_error(p_t2_a_shot,v2_y_a_shot)
-mae_t3_a_shot=mean_absolute_error(p_t3_a_shot,v3_y_a_shot)
+# mae_t1_a_shot=mean_absolute_error(p_t1_a_shot,v1_y_a_shot)
+# mae_t2_a_shot=mean_absolute_error(p_t2_a_shot,v2_y_a_shot)
+# # mae_t3_a_shot=mean_absolute_error(p_t3_a_shot,v3_y_a_shot)
 
-mae_t1_a_cross=mean_absolute_error(p_t1_a_cross,v1_y_a_cross)
-mae_t2_a_cross=mean_absolute_error(p_t2_a_cross,v2_y_a_cross)
-mae_t3_a_cross=mean_absolute_error(p_t3_a_cross,v3_y_a_cross)
+# mae_t1_a_cross=mean_absolute_error(p_t1_a_cross,v1_y_a_cross)
+# mae_t2_a_cross=mean_absolute_error(p_t2_a_cross,v2_y_a_cross)
+# # mae_t3_a_cross=mean_absolute_error(p_t3_a_cross,v3_y_a_cross)
 
-#%% note
-MAE=mean_absolute_error(test,v1_y_h_shoton)
-MSE=mean_squared_error(test,v1_y_h_shoton)
-RMSE=math.sqrt(MSE)
-#%% Grid Search
-model = ElasticNet()
-cv = [(slice(None), slice(None))]
-grid = dict()
-grid['alpha'] = arange(0, 1, 0.01)
-grid['l1_ratio'] = arange(0, 1, 0.01)
-search = GridSearchCV(model, grid, scoring='neg_mean_squared_error', cv=cv, n_jobs=-1)
-results = search.fit(t2_x, t2_y_h_cross)
-# summarize
-print('MSE: %.3f' % results.best_score_)
-print('Config: %s' % results.best_params_)
+# #%% note
+# # MAE=mean_absolute_error(test,v1_y_h_shoton)
+# # MSE=mean_squared_error(test,v1_y_h_shoton)
+# # RMSE=math.sqrt(MSE)
+# #%% Grid Search
+# model = ElasticNet()
+# cv = [(slice(None), slice(None))]
+# grid = dict()
+# grid['alpha'] = arange(0, 1, 0.01)
+# grid['l1_ratio'] = arange(0, 1, 0.01)
+# search = GridSearchCV(model, grid, scoring='neg_mean_squared_error', cv=cv, n_jobs=-1)
+# results = search.fit(t2_x, t2_y_h_cross)
+# # summarize
+# print('MSE: %.3f' % results.best_score_)
+# print('Config: %s' % results.best_params_)
 
