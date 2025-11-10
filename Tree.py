@@ -213,41 +213,52 @@ m12.best_estimator_.save_model("m12.txt")
 m21.best_estimator_.save_model("m21.txt")
 m22.best_estimator_.save_model("m22.txt")
 #%% load model
-m11= xgb.Booster()
-m12= xgb.Booster()
-m21= xgb.Booster()
-m22= xgb.Booster()
-m11.load_model("m11.txt")
-m12.load_model("m12.txt")
-m21.load_model("m21.txt")
-m22.load_model("m22.txt")
+m11_loaded = xgb.XGBClassifier()
+m12_loaded = xgb.XGBClassifier()
+m21_loaded = xgb.XGBClassifier()
+m22_loaded = xgb.XGBClassifier()
+m11_loaded.load_model("m11.txt")
+m12_loaded.load_model("m12.txt")
+m21_loaded.load_model("m21.txt")
+m22_loaded.load_model("m22.txt")
 #%% prediction
-p11 = m11.predict(t11)
+p11 = m11_loaded.predict_proba(t11)
+
 #%%
-p12 = m12.predict_proba(t12)
-p21 = m21.predict_proba(t21)
-p22 = m22.predict_proba(t22)
+p12 = m12_loaded.predict_proba(t12)
+
+p21 = m21_loaded.predict_proba(t21)
+
+p22 = m22_loaded.predict_proba(t22)
+
 #%% Features plot 
 fig, ax = plt.subplots(figsize=(5, 10))
 GAP1_fig=xgb.plot_importance(m11.best_estimator_,ax=ax)
-
+plt.show()
 #%%
 fig, ax = plt.subplots(figsize=(5, 10))
 GAP2_fig=xgb.plot_importance(m12.best_estimator_,ax=ax)
-
+plt.show()
 #%%
 LR1_fig=xgb.plot_importance(m21.best_estimator_,)
+plt.show()
 LR2_fig=xgb.plot_importance(m22.best_estimator_,)
+plt.show()
 #%%
 fig, ax = plt.subplots(figsize=(5, 10))
 FIFA_fig=xgb.plot_importance(m3.best_estimator_,ax=ax)
+plt.show()
 #%% Features plot with saved model
 fig, ax = plt.subplots(figsize=(5, 10))
-xgb.plot_importance(m11,ax=ax)
+xgb.plot_importance(m11_loaded.get_booster(),ax=ax)
+plt.show()
 #%%
-xgb.plot_importance(m12,)
-xgb.plot_importance(m21,)
-xgb.plot_importance(m22,)
+xgb.plot_importance(m12_loaded.get_booster(),)
+plt.show()
+xgb.plot_importance(m21_loaded.get_booster(),)
+plt.show()
+xgb.plot_importance(m22_loaded.get_booster(),)
+plt.show()
 
 
 #%%
@@ -260,11 +271,11 @@ result1=pd.concat([pd.DataFrame(p11), data_v["stage"].reset_index()], axis=1, ig
 result2=result1[45:302]
 #%% remove stage 1 to 6 and stage 33 to 38 error 
 # m11 GAP 3 stat, m12 GAP 2 stat
-var11=m11.predict(t11)
-var12=m12.predict(t12)
+var11=m11_loaded.predict(t11)
+var12=m12_loaded.predict(t12)
 
-var21=m21.predict(t21)
-var22=m22.predict(t22)
+var21=m21_loaded.predict(t21)
+var22=m22_loaded.predict(t22)
 var3=m3.predict(t3)
 #%%
 b11=brier_score_loss(v[45:302],p11[45:302,1])
