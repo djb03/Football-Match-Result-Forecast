@@ -19,12 +19,13 @@ We:
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from dataclasses import dataclass
 from typing import List, Dict, Tuple
 
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import f1_score, roc_auc_score
+from sklearn.metrics import f1_score, roc_auc_score, confusion_matrix, ConfusionMatrixDisplay
 
 # ---------------------------------------------------------------------
 # CONFIG – EDIT DATA_PATH TO POINT TO YOUR MERGED TREE/LR DATASET
@@ -251,7 +252,7 @@ def train_xgb_classifier_binary(
     feature_cols: List[str],
     target_col: str = TARGET_COL,
     random_state: int = 42,
-) -> Tuple[XGBClassifier, Dict[str, float]]:
+) -> Tuple[XGBClassifier, Dict[str, float], Dict[str, np.ndarray]]:
     """
     Train a binary XGBoost classifier for home_result.
     Returns model + metrics on a holdout set.
@@ -283,7 +284,12 @@ def train_xgb_classifier_binary(
     roc = roc_auc_score(y_test, y_proba)
 
     metrics = {"f1": f1, "roc_auc": roc}
-    return model, metrics
+    eval_payload = {
+        "y_test": y_test,
+        "y_pred": y_pred,
+        "y_proba": y_proba,
+    }
+    return model, metrics, eval_payload
 
 
 def train_group_models_binary(
@@ -292,11 +298,11 @@ def train_group_models_binary(
     feature_cols: List[str] = None,
     target_col: str = TARGET_COL,
     random_state: int = 42,
-) -> Dict[str, Tuple[XGBClassifier, Dict[str, float]]]:
+) -> Dict[str, Tuple[XGBClassifier, Dict[str, float], Dict[str, np.ndarray]]]:
     """
     Train separate binary models for each Kelly group: easy/medium/hard.
 
-    Returns dict[group] = (model, metrics).
+    Returns dict[group] = (model, metrics, eval_payload).
     """
     if feature_cols is None:
         feature_cols = FEATURE_COLS
@@ -307,13 +313,13 @@ def train_group_models_binary(
         if len(subset) < 50:
             print(f"[INFO] Skipping group '{group}' (too few samples: {len(subset)})")
             continue
-        model, metrics = train_xgb_classifier_binary(
+        model, metrics, eval_payload = train_xgb_classifier_binary(
             subset,
             feature_cols=feature_cols,
             target_col=target_col,
             random_state=random_state,
         )
-        models[group] = (model, metrics)
+        models[group] = (model, metrics, eval_payload)
     return models
 
 
@@ -333,8 +339,15 @@ def main():
 
     # 2. Train global model
     print("=== Training global XGBoost model (binary home win) ===")
-    global_model, global_metrics = train_xgb_classifier_binary(df, FEATURE_COLS)
+    global_model, global_metrics, global_eval = train_xgb_classifier_binary(df, FEATURE_COLS)
     print("Global model metrics:", global_metrics)
+
+    cm = confusion_matrix(global_eval["y_test"], global_eval["y_pred"])
+    disp = ConfusionMatrixDisplay(cm, display_labels=["Not home win", "Home win"])
+    disp.plot(colorbar=False, cmap="Blues")
+    plt.title("Global model confusion matrix (holdout)")
+    plt.tight_layout()
+    plt.show()
 
     # 3. Get model probabilities for home win
     df["p_home"] = global_model.predict_proba(df[FEATURE_COLS].values)[:, 1]
@@ -345,6 +358,44 @@ def main():
     # 5. Compute Kelly index + difficulty groups
     df = compute_kelly_index_binary(df, model_prob_col="p_home", odds_col="home_odds_synth")
     df = classify_match_difficulty(df, index_col="kelly_index")
+
+    # 5b. Visualize Kelly index distribution + group sizes
+    kelly_series = df["kelly_index"].dropna()
+    q_lo, q_hi = kelly_series.quantile([0.33, 0.66])
+
+    plt.figure(figsize=(9, 4))
+    plt.hist(kelly_series, bins=40, color="steelblue", alpha=0.7, edgecolor="white")
+    plt.axvline(q_lo, color="orange", linestyle="--", label="33% quantile (hard/medium)")
+    plt.axvline(q_hi, color="green", linestyle="--", label="66% quantile (medium/easy)")
+    plt.title("Distribution of Kelly Index (Home bets)")
+    plt.xlabel("Kelly fraction")
+    plt.ylabel("Match count")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    group_counts = (
+        df["kelly_group"]
+            .value_counts()
+            .reindex(["easy", "medium", "hard"])
+            .fillna(0)
+    )
+    plt.figure(figsize=(6, 4))
+    ax = group_counts.plot(kind="bar", color=["green", "goldenrod", "tomato"])
+    plt.ylabel("Match count")
+    plt.title("Kelly group counts")
+    plt.xticks(rotation=0)
+    for idx, value in enumerate(group_counts):
+        ax.text(
+            idx,
+            value + max(1, group_counts.max()) * 0.01,
+            f"{int(value)}",
+            ha="center",
+            va="bottom",
+            fontweight="bold",
+        )
+    plt.tight_layout()
+    plt.show()
 
     # 6. Strategy A: global model + Kelly filter betting
     print("\n=== Strategy A: Kelly-based betting using global model ===")
@@ -372,7 +423,7 @@ def main():
     # 7. Strategy B: Per-Kelly-group models vs global model
     print("\n=== Strategy B: Per-group models vs global model ===")
     group_models = train_group_models_binary(df, feature_cols=FEATURE_COLS)
-    for group, (_, metrics) in group_models.items():
+    for group, (_, metrics, _) in group_models.items():
         print(f"Group '{group}' model metrics:", metrics)
 
     # (Optional) Save with Kelly fields for analysis in your paper/project
